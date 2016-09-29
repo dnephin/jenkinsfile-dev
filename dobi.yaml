@@ -1,0 +1,21 @@
+
+meta:
+    project: jenkinsfile-dev
+
+mount=git-data:
+    bind: data/git
+    path: /tmp/files
+
+mount=jenkins-data:
+    bind: data/jenkins
+    path: /var/jenkins_home/jobs
+
+image=jenkins-demo:
+    image: jenkinsci/workflow-demo
+    tags: [latest]
+    pull: 48h
+
+job=jenkinsci:
+    use: jenkins-demo
+    interactive: true
+    mounts: [git-data, jenkins-data]
